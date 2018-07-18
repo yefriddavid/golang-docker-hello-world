@@ -17,20 +17,20 @@ type Product struct {
 }
 
 type ApiResults struct {
-  //results *[]Person
-  info *Info
+	Results []Person 	`json:"results"`
+    Info Info          `json:"info"`
 }
 
 type Person struct {
-  gender string
-  name *User
+	Gender string 	`json:"gender"`
+	Name User 		`json:"name"`
 }
 
 type Info struct {
   Seed string 		`json:"seed"`
-  Results int
-  Page int
-  Version string
+  Results int 		`json:"results"`
+  Page int 		`json:"page"`
+  Version string 		`json:"version"`
 }
 type User struct {
   Title string 		`json:"title"`
@@ -42,7 +42,7 @@ type Request struct {
     Operation string      `json:"operation"`
     Key string            `json:"key"`
     Value string          `json:"value"`
-    //Info Info          `json:"value"`
+    Info Info          `json:"info"`
 }
 
 
@@ -63,11 +63,12 @@ func main() {
             os.Exit(1)
         }
 	userString := string(contents)
-	//userString = string("{'operation': 'get', 'key': 'example', 'info': {'seed':'xxx'}}")
-	userString = string("{'operation': 'get', 'key': 'example'}")
+	//userString = string(`{"operation": "get", "key": "example", "info": {"seed":"xxx"}}`)
+	//userString = string(`{"results":[{"gender":"male","name":{"title":"mr","first":"dylan","last":"welch"}}],"info":{"seed":"9fda9ddf1d5c2d92","results":1,"page":1,"version":"1.2"}}`)
+	//userString = string(`{"operation": "get", "key": "example"}`)
         //fmt.Printf("%s\n", userString)
-	//data := ApiResults{}
-	data := Request{}
+	data := &ApiResults{}
+	//data := &Request{}
 	json.Unmarshal([]byte(userString), data)
 
 

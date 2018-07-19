@@ -34,6 +34,8 @@ func main() {
 
   // Delete - delete product
   db.Delete(&product)
+
+
 }
 
 
